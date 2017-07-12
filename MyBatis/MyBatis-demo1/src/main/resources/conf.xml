@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置环境运行环境的集合，默认运行的环境是 default 属性中指定的值-->
+    <environments default="development">
+        <!--配置运行环境，id 属性是这个环境的唯一标识-->
+        <environment id="development">
+            <!--
+                配置选用的事务类型，MyBatis 为我们提供了两种事务类型：
+                - JDBC: 使用 MyBatis 框架的事务管理器来进行事务管理
+                - MANAGED: 将事务管理交给其他框架框架处理 （如 Spring 框架），即这个配置下 MyBatis 不对事务做任何处理
+            -->
+            <transactionManager type="JDBC" />
+            <!--
+                配置数据源，数据源由三种类型 （type）
+                - UNPOOLED: 简单的数据源，如同直接使用 JDBC 驱动操作数据库一样，每次操作数据库都发一次连接请求和断开连接。
+                - POOLED: 使用连接池，这个是当前一种很流行的操作数据库方法，通过维持一定数量的数据库连接，每次需要操作数据库时，便直接在连接池
+                            中分配一个连接，这样省去了频繁的连接和断开，节省了大量资源，同时也提高了连接速度。
+                - JNDI: 引用外部的数据源 （datasource）
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!--记录映射文件-->
+    <mappers>
+        <mapper resource="userMapper.xml"/>
+    </mappers>
+</configuration>

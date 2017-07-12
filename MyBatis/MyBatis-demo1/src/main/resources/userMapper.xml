@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+    <!--
+        CRUB 操作
+    -->
+
+    <!--增加-->
+    <insert id="addUser" parameterType="cn.wean2016.domain.User" >
+        <!--
+            values() 中传入的值是参数domain.UserUser) 中的字段名
+        -->
+        INSERT INTO users(name, age) values(#{name}, #{age})
+    </insert>
+
+    <!--删-->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users WHERE id=#{id}
+    </delete>
+
+    <!--改-->
+    <update id="updateUser" parameterType="cn.wean2016.domain.User">
+        UPDATE users SET name=#{name}, age=#{age} WHERE id=#{id}
+    </update>
+
+
+    <select id="getUser" parameterType="int"
+            resultType="cn.wean2016.domain.User">
+        select * from users where id=#{id}
+    </select>
+
+    <!--定义了 resultType ，使查询结果不用转型-->
+    <select id="getAllUser" resultType="cn.wean2016.domain.User">
+        SELECT * FROM users
+    </select>
+
+</mapper>
