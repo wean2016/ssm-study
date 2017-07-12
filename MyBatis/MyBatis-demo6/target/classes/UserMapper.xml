@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+
+    <select id="getUser" parameterType="ConditionUser" resultType="User">
+        SELECT * FROM d_user u WHERE  u.name LIKE #{name} AND u.age BETWEEN #{minAge} AND #{maxAge}
+    </select>
+
+    <select id="getUser2" parameterType="ConditionUser" resultType="User">
+        SELECT * FROM d_user u WHERE
+        <if test="name != '%null%'">
+            u.name LIKE #{name} AND
+        </if>
+        u.age BETWEEN #{minAge} AND #{maxAge}
+    </select>
+
+</mapper>
