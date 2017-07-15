@@ -9,4 +9,14 @@
     <!-- 设置类别名 -->
     <!-- 设置数据库连接环境 -->
     <!-- 映射文件 -->
+
+    <!--配置别名-->
+    <typeAliases>
+        <package name="cn.wean2016.bean"/>
+    </typeAliases>
+
+    <!--<mappers>-->
+    <!--<mapper resource="cn/wean2016/mapper/UserMapper.xml"/>-->
+    <!--<mapper class="cn.wean2016.mapper.UserMapper"/>-->
+    <!--</mappers>-->
 </configuration>
