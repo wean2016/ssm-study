@@ -64,4 +64,7 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
+    <!--配置 service bean-->
+    <bean id="userService" class="cn.wean2016.service.serviceImpl.UserServiceImpl"/>
+
 </beans>

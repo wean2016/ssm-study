@@ -18,7 +18,8 @@
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="location" value="classpath:db.properties"/>
     </bean>
-    <!-- 1. 数据源 : DriverManagerDataSource -->
+    <!-- 1. 数据源 : dbcp -->
+    <!--若是换成 druid 则使用 com.alibaba.druid.pool.DruidDataSource-->
     <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${driverClassName}"/>
         <property name="url" value="${url}"/>
@@ -62,5 +63,8 @@
         <property name="mapperInterface" value="cn.wean2016.mapper.UserMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+
+    <!--配置 service bean-->
+    <bean id="userService" class="cn.wean2016.service.serviceImpl.UserServiceImpl"/>
 
 </beans>
