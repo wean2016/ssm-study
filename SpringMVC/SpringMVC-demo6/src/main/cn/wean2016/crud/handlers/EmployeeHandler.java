@@ -4,13 +4,23 @@ import main.cn.wean2016.crud.dao.DepartmentDao;
 import main.cn.wean2016.crud.dao.EmployeeDao;
 import main.cn.wean2016.crud.entitis.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -24,6 +34,54 @@ public class EmployeeHandler {
 
     @Autowired
     private DepartmentDao departmentDao;
+
+    // 文件上传
+    @RequestMapping("/testFileUpload")
+    private String testFileUpload(@RequestParam("desc") String desc,
+                                  @RequestParam("file")MultipartFile file) throws IOException {
+        System.out.println("desc:   " + desc);
+        System.out.println("OriginalFilename:   "+ file.getOriginalFilename());
+        System.out.println("InputStream:   " + file.getInputStream());
+
+        return "success";
+    }
+
+    // 下载
+    @RequestMapping("/testResponseEntity")
+    public ResponseEntity<byte[]> testResponseEntity(HttpSession session) throws IOException {
+        byte[] body = null;
+        ServletContext servletContext = session.getServletContext();
+        InputStream in = servletContext.getResourceAsStream("/files/pom.xml");
+        body = new byte[in.available()];
+        in.read(body);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment;filename=pom.xml");
+
+        HttpStatus status = HttpStatus.OK;
+
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(body,headers,status);
+
+        return responseEntity;
+    }
+
+
+    // 获得文件
+    @ResponseBody
+    @RequestMapping("testHttpMessageConverter")
+    public String testHttpMessageConverter(@RequestBody String body){
+        System.out.println(body);
+        return "hello world" + new Date();
+    }
+
+
+
+    // 输出 JSON
+    @ResponseBody
+    @RequestMapping("/testJson")
+    public Collection<Employee> testJson(){
+        return employeeDao.getAll();
+    }
 
     @ModelAttribute
     public void getEmployee(@RequestParam(value="id",required=false) Integer id,

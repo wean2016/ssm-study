@@ -5,10 +5,13 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
+@Component
 public class Employee {
     private Integer id;
 
@@ -72,60 +75,66 @@ public class Employee {
                 '}';
     }
 
-    public float getSalary() {
-        return salary;
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
-
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Employee setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public Employee setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Employee setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public Employee setGender(Integer gender) {
         this.gender = gender;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
+        return this;
     }
 
     public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public Employee setBirth(Date birth) {
         this.birth = birth;
+        return this;
     }
 
+    public float getSalary() {
+        return salary;
+    }
+
+    public Employee setSalary(float salary) {
+        this.salary = salary;
+        return this;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public Employee setDepartment(Department department) {
+        this.department = department;
+        return this;
+    }
 }

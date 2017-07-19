@@ -18,16 +18,18 @@ public class Department {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public Department setId(Integer id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getDepartmentName() {
 		return departmentName;
 	}
 
-	public void setDepartmentName(String departmentName) {
+	public Department setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+		return this;
 	}
 
 	@Override
